@@ -5,19 +5,24 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { ShopModule } from './shop/shop.module';
 import { ProductModule } from './product/product.module';
-import { RouterModule } from '@nestjs/core';
-
+// import { databaseConfig } from '@/config/database';
+import { Shop } from './shop/entities/shop.entity';
 @Module({
     imports: [
         TypeOrmModule.forRoot({
-            type: 'mysql',
+            type: 'postgres',
             host: 'localhost',
-            port: 3306,
-            username: 'root',
-            password: 'root',
+            port: 5432,
+            username: 'default',
+            password: 'secret',
             database: 'nestjs',
-            entities: [],
-            synchronize: true,
+            entities: [
+                Shop
+            ],
+            // migrations: ['src/migrations/Shop.ts'],
+            migrationsTableName: 'migrations',
+            synchronize: false, /* absolutely do not change this config to true */
+            
         }),
         ShopModule,
         ProductModule,
@@ -25,9 +30,7 @@ import { RouterModule } from '@nestjs/core';
     controllers: [AppController],
     providers: [AppService],
 })
-@Module({
-    imports: [TypeOrmModule.forRoot(), ShopModule],
-})
+
 export class AppModule {
     constructor(private dataSource: DataSource) {}
 }

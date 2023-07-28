@@ -1,15 +1,22 @@
 import { Injectable } from '@nestjs/common';
-import { Shop } from './interfaces/shop.interface';
+import { Shop } from './entities/shop.entity';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import { BaseService } from '@/shared/base.service';
 
-@Injectable()
-export class ShopService {
-  private readonly shops: Shop[] = [];
+export class ShopService extends BaseService<Shop> {
+    private readonly shops: Shop[] = [];
+    constructor(
+        @InjectRepository(Shop)
+        repository: Repository<Shop>,
+    ) {
+        super(repository);
+    }
+    create(shop: Shop) {
+        this.shops.push(shop);
+    }
 
-  create(shop: Shop) {
-    this.shops.push(shop);
-  }
-
-  findAll(): Shop[] {
-    return this.shops;
-  }
+    findAll(): any {
+        return '=============';
+    }
 }
