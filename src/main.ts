@@ -1,14 +1,12 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { DataSource } from 'typeorm';
-import { Shop } from './shop/entities/shop.entity';
 import { INestApplication } from '@nestjs/common';
 
 export let app: INestApplication;
 async function bootstrap() {
-  app = await NestFactory.create(AppModule);
+    app = await NestFactory.create(AppModule);
 
-  await app.listen(3000);
+    await app.listen(3000);
 }
 bootstrap();
 

@@ -1,13 +1,13 @@
-import { Injectable } from "@nestjs/common";
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
+import { Injectable } from '@nestjs/common';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm';
 
-@Entity({name: "shops"})
+@Entity({ name: 'shops' })
 export class Shop extends BaseEntity {
-    static readonly CHECK=2;
-    @PrimaryGeneratedColumn({type: "bigint"})
+    static readonly CHECK = 2;
+    @PrimaryGeneratedColumn({ type: 'bigint' })
     id: number;
 
-    @Column({ nullable: true }) 
+    @Column({ nullable: true })
     name: string;
 
     @Column({ unique: true, nullable: false })
@@ -64,10 +64,7 @@ export class Shop extends BaseEntity {
     @Column({ nullable: true, default: false })
     is_onboarding: boolean;
 
-
-
     @Column({ nullable: true })
-
     @Column({ nullable: true, default: () => 'CURRENT_TIMESTAMP' })
     created_at: Date;
 
